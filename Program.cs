@@ -34,7 +34,7 @@ namespace ex4_encapsulation
             throw new Exception("Input cannot be empty");
           }
 
-          var cmdArgs = input.Split(' ');
+          var cmdArgs = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
           if(cmdArgs.Length != 4)
           {
