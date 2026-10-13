@@ -6,8 +6,10 @@ namespace ex4_encapsulation.Models
   public class Person
   {
     // jag är van vid att skriva private med '_' innan namnet.
-    private string _firstName; 
-    private string _lastName;
+
+    // fix: startvärde för _firstName och _lastName
+    private string _firstName = string.Empty; 
+    private string _lastName = string.Empty;
     private int _age;
     private decimal _salary;
 
@@ -77,7 +79,8 @@ namespace ex4_encapsulation.Models
 
     public override string ToString()
     {
-      return $"{this.FirstName} {this.LastName} receives {this._salary} dollars";
+      // fix: hade inte ändrat till public property för Salary
+      return $"{this.FirstName} {this.LastName} receives {this.Salary:F2} dollars";
     }
 
     public void IncreaseSalary(decimal percentage)
@@ -87,7 +90,7 @@ namespace ex4_encapsulation.Models
         percentage /= 2;
       }
 
-      this._salary += this._salary * percentage / 100;
+      this.Salary += this.Salary * percentage / 100;
     }
   }
 }
