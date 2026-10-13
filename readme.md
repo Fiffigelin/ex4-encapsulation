@@ -31,11 +31,11 @@ public static void Main()
 Examples 
 | Input| Output|
 | :--- | :---: |
-| Anna Persson 65 | Anna Persson is 65 years old. |
-| Anna Andersson 34 | Anna Andersson is 34 years old. |
-| Johanna Eriksson 57 | Johanna Eriksson is 57 years old. |
+| Anna Persson 65 | Anna Andersson is 34 years old. |
+| Anna Andersson 34 | Anna Persson is 65 years old. |
+| Johanna Eriksson 57 | Erika Samuelsson is 35 years old. |
 | Johanna Svensson 27 | Johanna Svensson is 27 years old. |
-| Erika Samuelsson 35 | Erika Samuelsson is 35 years old. |   
+| Erika Samuelsson 35 | Johanna Eriksson is 57 years old. |
  
 ## 2.Salary Increase
   
