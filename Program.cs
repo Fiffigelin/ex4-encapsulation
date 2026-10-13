@@ -6,14 +6,27 @@ namespace ex4_encapsulation
   {
     static void Main(string[] args)
     {
-      var lines = 5;
       var persons = new List<Person>();
+      var lines = 0;
+
+      do
+      {
+        Console.Write("Write a number of people you would like to add: ");
+        var input = Console.ReadLine();
+
+        if(int.TryParse(input, out lines) && lines > 0)
+        {
+          break;
+        }
+
+        Console.WriteLine("Please enter a whole number over 0.");
+      } while(true);
 
       for(int i = 0; i < lines; i++)
       {
         try
         {
-          Console.Write("Please insert firstname, lastname and age: ");
+          Console.Write("Please insert firstname, lastname, age and salary: ");
           var input = Console.ReadLine();
 
           if(input == null || string.IsNullOrWhiteSpace(input))
@@ -23,9 +36,9 @@ namespace ex4_encapsulation
 
           var cmdArgs = input.Split(' ');
 
-          if(cmdArgs.Length != 3)
+          if(cmdArgs.Length != 4)
           {
-            throw new Exception("Please enter exaclty three values");
+            throw new Exception("Please enter exaclty four values");
           }
 
           if(!int.TryParse(cmdArgs[2], out int age) || age <= 0)
@@ -33,7 +46,12 @@ namespace ex4_encapsulation
             throw new Exception("Age must be a number higher than 0.");
           }
 
-          var person = new Person(cmdArgs[0], cmdArgs[1], age);
+          if(!decimal.TryParse(cmdArgs[3], out decimal salary) || salary <= 0)
+          {
+            throw new Exception("Salary must be a number higher than 0 and be written with ','");
+          }
+
+          var person = new Person(cmdArgs[0], cmdArgs[1], age, salary);
           persons.Add(person);
         }
         catch(Exception e)
@@ -44,10 +62,17 @@ namespace ex4_encapsulation
 
         if((i+1) == lines)
         {
-          persons.OrderBy(p => p.FirstName)
-            .ThenBy(p => p.Age)
-            .ToList()
-            .ForEach(persons => Console.WriteLine(persons.ToString()));
+          var bonus = 0m;
+          bool isValid = false;
+          do
+          {
+            Console.Write("Write bonus: ");
+
+            isValid = decimal.TryParse(Console.ReadLine(), out bonus);
+          } while(!isValid);
+
+          persons.ForEach(p => p.IncreaseSalary(bonus));
+          persons.ForEach(persons => Console.WriteLine(persons.ToString()));
         }
       }
     }
